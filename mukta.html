@@ -192,7 +192,8 @@ footer p{font-size:0.78em;letter-spacing:0.14em;text-transform:uppercase;color:r
 .wheel-result{max-width:500px;margin:0 auto;padding:36px 44px;background:var(--cream);border-radius:24px;border:1.5px solid rgba(255,69,0,0.15);display:none;animation:fadeUp 0.5s ease;}
 .wheel-result.show{display:block;}
 .wr-icon{font-size:3.5em;margin-bottom:12px;display:block;}
-.wr-title{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-style:italic;color:var(--charcoal);margin-bottom:10px;}
+.wr-title{font-size:0.72em;letter-spacing:0.22em;text-transform:uppercase;color:var(--orange);font-weight:500;margin-bottom:8px;}
+.wr-name{font-family:'Cormorant Garamond',serif;font-size:2.2em;font-style:italic;color:var(--charcoal);margin-bottom:14px;font-weight:600;line-height:1.2;}
 .wr-note{font-size:0.88em;color:var(--soft);line-height:1.7;}
 
 /* RESPONSIVE */
@@ -443,8 +444,8 @@ footer p{font-size:0.78em;letter-spacing:0.14em;text-transform:uppercase;color:r
 <!-- SPINNING WHEEL -->
 <section id="wheel">
   <div class="section-inner">
-    <span class="section-tag fup">আজকে কী করবো?</span>
-    <h2 class="section-title fup">Surprise <em>Date Wheel</em></h2>
+    <span class="section-tag fup">আজকের Surprise</span>
+    <h2 class="section-title fup">Spin করুন, <em>Surprise</em> পান</h2>
     <div class="wheel-center fup">
       <div class="wheel-canvas-wrap">
         <div class="wheel-pointer"></div>
@@ -456,6 +457,7 @@ footer p{font-size:0.78em;letter-spacing:0.14em;text-transform:uppercase;color:r
       <div class="wheel-result" id="wheelResult">
         <span class="wr-icon" id="wrIcon"></span>
         <div class="wr-title" id="wrTitle"></div>
+        <div class="wr-name" id="wrName"></div>
         <div class="wr-note" id="wrNote"></div>
       </div>
     </div>
@@ -599,7 +601,7 @@ var letters=[
   {
     date:'26 March 2026 · Dhaka',
     salute:'Miss Dr. Mukta,',
-    body:'আজকে তোমাকে একটা কথা বলি — সেই প্রথম মেইলটা পাঠানোর আগে আমি অনেকক্ষণ বসেছিলাম।\n\nকী লিখবো, কীভাবে শুরু করবো — কিছু মাথায় আসছিল না। কারণ তোমার কাছে যা বলতে চেয়েছিলাম, সেটা আসলে শব্দে বলার মতো না।\n\nতুমি তখন জানতে না, কিন্তু আমি জানতাম — তোমার সাথে কথা বলতে পারাটা আমার কাছে অনেক বড় কিছু।\n\nআলহামদুলিল্লাহ — তুমি reply করেছিলে। ❤️',
+    body:'সেইদিন আমি মেইলটা তোমাকে না — তোমার মাকে করেছিলাম।\n\nআমি তখন জানতাম না তোমার সাথে কখনো সরাসরি কথা হবে কিনা। নিশ্চিত ছিলাম না। কিন্তু মনের মধ্যে একটা কথা ছিল — যদি চেষ্টাই না করি, তাহলে কীভাবে জানবো?\n\nতোমার মাকে মেইল করাটা আমার জীবনের সেরা সিদ্ধান্তগুলোর একটা। কারণ সেই একটা সাহসী পদক্ষেপ না নিলে আজকে এই মুহূর্তটা হতো না।\n\nআলহামদুলিল্লাহ — আল্লাহ পথ খুলে দিয়েছিলেন। আর তুমি এসেছিলে। ❤️',
     sign:'— Milad ❤️',
     stamp:'💌'
   },
@@ -693,7 +695,7 @@ var wheelSegments=[
   {label:'পার্কে বসে\nগল্প',icon:'🌿',color:'#E84600',note:'কোনো পার্কে বসে শুধু গল্প করবো — সময়ের কোনো তাড়া নেই। ❤️'},
   {label:'ফুচকা\nখাওয়া',icon:'🫧',color:'#FF5733',note:'ফুচকা খেতে খেতে তোমার মুখের expression দেখবো — সেটাই পুরস্কার। ❤️'},
   {label:'বাসায়\nরান্না',icon:'🍳',color:'#FF7A00',note:'তোমার জন্য নিজের হাতে রান্না করবো — বলো কী খেতে চাও। ❤️'},
-  {label:'মুভি একসাথে\nদেখা',icon:'🎬',color:'#D93600',note:'পাশাপাশি বসে একটা মুভি দেখবো — মুভির চেয়ে তোমাকে বেশি দেখবো। ❤️'},
+  {label:'বই পড়তে\nবসা',icon:'📖',color:'#D93600',note:'একসাথে বসে বই পড়বো — নীরবতাও কথা বলে, জানো তো? ❤️'},
   {label:'চা খেতে\nবের হওয়া',icon:'☕',color:'#FF6020',note:'এক কাপ চা নিয়ে বসে থাকবো — কথা না বললেও চলবে, তুমি পাশে থাকলেই হয়। ❤️'}
 ];
 
@@ -716,38 +718,25 @@ function drawWheel(angle){
     ctx.closePath();
     ctx.fillStyle=wheelSegments[i].color;
     ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.3)';
-    ctx.lineWidth=2;
+    ctx.strokeStyle='rgba(255,255,255,0.35)';
+    ctx.lineWidth=2.5;
     ctx.stroke();
 
-    // icon
+    // icon only — no text label
     ctx.save();
     ctx.translate(cx,cy);
     ctx.rotate(start+arc/2);
     ctx.textAlign='center';
-    ctx.font='24px serif';
-    ctx.fillText(wheelSegments[i].icon,r*0.68,8);
-    ctx.restore();
-
-    // label
-    ctx.save();
-    ctx.translate(cx,cy);
-    ctx.rotate(start+arc/2);
-    ctx.textAlign='center';
-    ctx.fillStyle='rgba(255,255,255,0.95)';
-    ctx.font='bold 11px DM Sans,sans-serif';
-    var lines=wheelSegments[i].label.split('\n');
-    lines.forEach(function(line,li){
-      ctx.fillText(line,r*0.38,(li-lines.length/2+0.5)*14);
-    });
+    ctx.font='28px serif';
+    ctx.fillText(wheelSegments[i].icon,r*0.62,10);
     ctx.restore();
   }
   // center circle
   ctx.beginPath();
-  ctx.arc(cx,cy,28,0,2*Math.PI);
+  ctx.arc(cx,cy,30,0,2*Math.PI);
   ctx.fillStyle='#fff';
   ctx.fill();
-  ctx.strokeStyle='rgba(255,69,0,0.3)';
+  ctx.strokeStyle='rgba(255,69,0,0.25)';
   ctx.lineWidth=2;
   ctx.stroke();
 }
@@ -787,13 +776,12 @@ function spinWheel(){
 }
 
 function showWheelResult(){
-  // pointer is at top (angle = -PI/2 from positive X)
-  // find which segment is at top
   var normalised=((-spinAngle%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
   var idx=Math.floor(normalised/arc)%totalSeg;
   var seg=wheelSegments[idx];
   document.getElementById('wrIcon').innerText=seg.icon;
-  document.getElementById('wrTitle').innerText=seg.label.replace('\n',' ');
+  document.getElementById('wrTitle').innerText='✦ আজকের Surprise';
+  document.getElementById('wrName').innerText=seg.label.replace('\n',' ');
   document.getElementById('wrNote').innerText=seg.note;
   var wr=document.getElementById('wheelResult');
   wr.classList.remove('show');
